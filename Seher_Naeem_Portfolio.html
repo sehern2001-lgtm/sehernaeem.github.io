@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seher Naeem — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --cream: #FAF7F2;
+    --warm-white: #FFFDF9;
+    --charcoal: #1C1C1C;
+    --dark: #2A2420;
+    --red: #8B1A1A;
+    --red-light: #C0392B;
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gray: #6B6560;
+    --light-gray: #E8E4DF;
+    --border: #DDD8D0;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250, 247, 242, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    padding: 18px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .nav-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 600;
+    color: var(--dark); letter-spacing: 0.02em;
+  }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    font-size: 0.82rem; font-weight: 400; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--gray);
+    text-decoration: none; transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--red); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 120px 60px 80px;
+    position: relative;
+    background: var(--warm-white);
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; right: 0;
+    width: 45%; height: 100%;
+    background: linear-gradient(135deg, var(--cream) 0%, #F0EAE0 100%);
+    clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 600px; }
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--red); font-weight: 500;
+    border: 1px solid var(--red); padding: 6px 16px;
+    margin-bottom: 32px;
+    animation: fadeUp 0.8s ease forwards;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 7vw, 6rem);
+    font-weight: 300; line-height: 1.05;
+    color: var(--dark); margin-bottom: 24px;
+    animation: fadeUp 0.8s 0.15s ease both;
+  }
+  .hero h1 em { font-style: italic; color: var(--red); }
+  .hero-desc {
+    font-size: 1rem; line-height: 1.8; color: var(--gray);
+    max-width: 480px; margin-bottom: 40px;
+    font-weight: 300;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; animation: fadeUp 0.8s 0.45s ease both; }
+  .btn-primary {
+    background: var(--dark); color: white;
+    padding: 14px 32px; font-size: 0.85rem;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    text-decoration: none; transition: all 0.3s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-primary:hover { background: var(--red); }
+  .btn-outline {
+    border: 1px solid var(--dark); color: var(--dark);
+    padding: 14px 32px; font-size: 0.85rem;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    text-decoration: none; transition: all 0.3s;
+  }
+  .btn-outline:hover { background: var(--dark); color: white; }
+
+  .hero-stats {
+    position: absolute; right: 60px; bottom: 80px; z-index: 2;
+    display: flex; gap: 48px;
+    animation: fadeUp 0.8s 0.6s ease both;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem; font-weight: 300; color: var(--dark);
+    line-height: 1;
+  }
+  .stat-label { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); margin-top: 4px; }
+
+  .scroll-indicator {
+    position: absolute; bottom: 32px; left: 60px;
+    display: flex; align-items: center; gap: 12px;
+    font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray);
+    animation: fadeUp 0.8s 0.75s ease both;
+  }
+  .scroll-line { width: 40px; height: 1px; background: var(--gray); }
+
+  /* SECTIONS */
+  section { padding: 100px 60px; }
+  .section-label {
+    font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--red); font-weight: 500; margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300; color: var(--dark);
+    line-height: 1.2; margin-bottom: 60px;
+  }
+
+  /* ABOUT */
+  .about { background: var(--warm-white); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .about-text p {
+    font-size: 1rem; line-height: 1.9; color: var(--gray);
+    font-weight: 300; margin-bottom: 20px;
+  }
+  .about-info { display: flex; flex-direction: column; gap: 20px; margin-top: 8px; }
+  .info-row { display: flex; gap: 16px; align-items: flex-start; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+  .info-key { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red); min-width: 90px; padding-top: 2px; }
+  .info-val { font-size: 0.92rem; color: var(--dark); line-height: 1.5; }
+
+  /* SKILLS */
+  .skills { background: var(--cream); }
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .skill-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    padding: 36px 28px;
+    transition: all 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .skill-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 3px; height: 0;
+    background: var(--red);
+    transition: height 0.4s ease;
+  }
+  .skill-card:hover::before { height: 100%; }
+  .skill-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+  .skill-icon { font-size: 1.8rem; margin-bottom: 16px; }
+  .skill-name { font-size: 0.95rem; font-weight: 500; color: var(--dark); margin-bottom: 10px; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-size: 0.7rem; padding: 4px 10px;
+    background: var(--cream); color: var(--gray);
+    letter-spacing: 0.04em;
+  }
+
+  /* EXPERIENCE */
+  .experience { background: var(--warm-white); }
+  .timeline { position: relative; padding-left: 32px; }
+  .timeline::before {
+    content: ''; position: absolute; left: 0; top: 8px; bottom: 8px;
+    width: 1px; background: var(--border);
+  }
+  .timeline-item { position: relative; margin-bottom: 56px; }
+  .timeline-dot {
+    position: absolute; left: -37px; top: 6px;
+    width: 10px; height: 10px;
+    background: var(--red); border-radius: 50%;
+  }
+  .timeline-date { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red); margin-bottom: 8px; }
+  .timeline-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--dark); margin-bottom: 4px; }
+  .timeline-company { font-size: 0.85rem; color: var(--gray); margin-bottom: 16px; }
+  .timeline-points { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .timeline-points li {
+    font-size: 0.88rem; color: var(--gray); line-height: 1.6;
+    padding-left: 16px; position: relative;
+  }
+  .timeline-points li::before { content: '–'; position: absolute; left: 0; color: var(--red); }
+
+  /* PROJECTS */
+  .projects { background: var(--cream); }
+  .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .project-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    padding: 40px 36px;
+    transition: all 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .project-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.1); }
+  .project-type {
+    font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--red); margin-bottom: 12px;
+  }
+  .project-name { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; color: var(--dark); margin-bottom: 12px; line-height: 1.2; }
+  .project-desc { font-size: 0.85rem; color: var(--gray); line-height: 1.7; }
+  .project-badge {
+    position: absolute; top: 24px; right: 24px;
+    font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase;
+    background: var(--cream); color: var(--gray); padding: 4px 10px;
+    border: 1px solid var(--border);
+  }
+
+  /* CONTACT */
+  .contact { background: var(--dark); }
+  .contact .section-label { color: var(--gold); }
+  .contact .section-title { color: white; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .contact-text { font-size: 1rem; color: rgba(255,255,255,0.5); line-height: 1.8; font-weight: 300; }
+  .contact-items { display: flex; flex-direction: column; gap: 24px; }
+  .contact-item {
+    display: flex; gap: 20px; align-items: center;
+    padding: 20px 24px;
+    border: 1px solid rgba(255,255,255,0.1);
+    text-decoration: none; transition: all 0.3s;
+  }
+  .contact-item:hover { border-color: var(--gold); background: rgba(201,168,76,0.05); }
+  .contact-item-icon { font-size: 1.2rem; }
+  .contact-item-info {}
+  .contact-item-label { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+  .contact-item-val { font-size: 0.9rem; color: rgba(255,255,255,0.75); }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark); border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 28px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  footer p { font-size: 0.75rem; color: rgba(255,255,255,0.3); letter-spacing: 0.06em; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 24px 60px; }
+    .hero::before { display: none; }
+    .hero-stats { position: static; margin-top: 40px; justify-content: flex-start; }
+    section { padding: 70px 24px; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 12px; padding: 24px; text-align: center; }
+    .scroll-indicator { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">Seher Naeem</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">Available for Opportunities · Dubai, UAE</div>
+    <h1>Admin &amp;<br><em>Data</em><br>Specialist</h1>
+    <p class="hero-desc">Multi-skilled professional with expertise in Excel, Python, accounting, and AI tools. Turning data into clarity and operations into efficiency.</p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary">View My Work</a>
+      <a href="#contact" class="btn-outline">Get In Touch</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">2+</div>
+      <div class="stat-label">Years Exp.</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">8+</div>
+      <div class="stat-label">Projects</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">4</div>
+      <div class="stat-label">Languages</div>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    Scroll to explore
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="section-label reveal">About Me</div>
+  <h2 class="section-title reveal">Driven by detail,<br>defined by results.</h2>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>I am a detail-oriented and multi-skilled professional based in Dubai, UAE, with hands-on experience across office administration, data management, accounting, and Python programming.</p>
+      <p>What sets me apart is my ability to bridge traditional administrative excellence with modern technology — I actively work with AI tools and continuously expand my skill set to stay ahead in a rapidly evolving world.</p>
+      <p>Currently sharing my AI learning journey publicly on LinkedIn, building a community around accessible tech education.</p>
+    </div>
+    <div class="about-info reveal">
+      <div class="info-row">
+        <span class="info-key">Location</span>
+        <span class="info-val">Dubai, United Arab Emirates</span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">Education</span>
+        <span class="info-val">BSc Mathematics — Women University Multan<br>BEd — Islamia University Bahawalpur (Current)</span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">Languages</span>
+        <span class="info-val">Urdu (Native) · Punjabi (Native)<br>English (Proficient) · Italian (Learning)</span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">Interests</span>
+        <span class="info-val">AI & Technology · Content Creation · Finance</span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">Email</span>
+        <span class="info-val">Seher.n2001@gmail.com</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills" id="skills">
+  <div class="section-label reveal">What I Do</div>
+  <h2 class="section-title reveal">Core Skills &amp;<br>Expertise</h2>
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-icon">📊</div>
+      <div class="skill-name">Excel & Data Management</div>
+      <div class="skill-tags">
+        <span class="tag">Advanced Excel</span>
+        <span class="tag">Pivot Tables</span>
+        <span class="tag">Dashboards</span>
+        <span class="tag">Data Analysis</span>
+        <span class="tag">Reporting</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">🐍</div>
+      <div class="skill-name">Python Programming</div>
+      <div class="skill-tags">
+        <span class="tag">Python 3</span>
+        <span class="tag">Jupyter Notebook</span>
+        <span class="tag">OOP</span>
+        <span class="tag">Data Structures</span>
+        <span class="tag">Automation</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">📋</div>
+      <div class="skill-name">Administration</div>
+      <div class="skill-tags">
+        <span class="tag">Office Management</span>
+        <span class="tag">Documentation</span>
+        <span class="tag">Scheduling</span>
+        <span class="tag">MS Office Suite</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">💰</div>
+      <div class="skill-name">Accounting & Finance</div>
+      <div class="skill-tags">
+        <span class="tag">Bookkeeping</span>
+        <span class="tag">Journal Entries</span>
+        <span class="tag">Balance Sheet</span>
+        <span class="tag">Payroll</span>
+        <span class="tag">Invoicing</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">🤖</div>
+      <div class="skill-name">AI Tools</div>
+      <div class="skill-tags">
+        <span class="tag">Claude AI</span>
+        <span class="tag">Gemini</span>
+        <span class="tag">Perplexity</span>
+        <span class="tag">ChatGPT</span>
+        <span class="tag">Prompt Writing</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">✍️</div>
+      <div class="skill-name">Content & Communication</div>
+      <div class="skill-tags">
+        <span class="tag">Content Writing</span>
+        <span class="tag">LinkedIn</span>
+        <span class="tag">E-Commerce</span>
+        <span class="tag">Customer Support</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience" id="experience">
+  <div class="section-label reveal">Career Journey</div>
+  <h2 class="section-title reveal">Work<br>Experience</h2>
+  <div class="timeline">
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">Jan 2024 – Oct 2024</div>
+      <div class="timeline-title">Administrative Assistant</div>
+      <div class="timeline-company">Akhuwat Foundation — Lahore Office</div>
+      <ul class="timeline-points">
+        <li>Managed office documentation, filing systems, and digital record updates</li>
+        <li>Performed accurate data entry for beneficiary and program records</li>
+        <li>Prepared Excel reports, attendance sheets, and documentation summaries</li>
+        <li>Assisted in daily office operations, scheduling, and staff coordination</li>
+      </ul>
+    </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">Dec 2024 – May 2025</div>
+      <div class="timeline-title">Data Entry Assistant</div>
+      <div class="timeline-company">Help Foundation — Pakistan</div>
+      <ul class="timeline-points">
+        <li>Entered, verified, and updated beneficiary and project data with accuracy</li>
+        <li>Managed digital files, forms, and data sheets for reporting purposes</li>
+        <li>Coordinated with team members to ensure timely data collection and processing</li>
+      </ul>
+    </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">2023 – 2024</div>
+      <div class="timeline-title">Online Sales & E-Commerce</div>
+      <div class="timeline-company">Self-Employed — WhatsApp, Daraz & Multi-Platform</div>
+      <ul class="timeline-points">
+        <li>Sourced products from wholesale suppliers and listed on Daraz and multiple platforms</li>
+        <li>Managed customer communication, order processing, and sales via WhatsApp</li>
+        <li>Handled product pricing, inventory tracking, and delivery coordination independently</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects" id="projects">
+  <div class="section-label reveal">My Work</div>
+  <h2 class="section-title reveal">Projects &amp;<br>Portfolio</h2>
+  <div class="projects-grid">
+    <div class="project-card reveal">
+      <div class="project-badge">Excel</div>
+      <div class="project-type">Data & HR Analytics</div>
+      <div class="project-name">Employee Payroll & Performance Dashboard</div>
+      <div class="project-desc">Comprehensive payroll system with performance tracking metrics, salary calculations, and visual dashboard for HR management.</div>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-badge">Excel</div>
+      <div class="project-type">Accounting</div>
+      <div class="project-name">Accounting Journal to Balance Sheet</div>
+      <div class="project-desc">Complete accounting cycle — from journal entries through trial balance to final balance sheet with automated calculations.</div>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-badge">Python</div>
+      <div class="project-type">Application Development</div>
+      <div class="project-name">Student Result Management System</div>
+      <div class="project-desc">Python application that calculates student marks, percentages, and auto-assigns grades with formatted output reports.</div>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-badge">Python</div>
+      <div class="project-type">Interactive App</div>
+      <div class="project-name">Quiz Application</div>
+      <div class="project-desc">Interactive Python quiz app with multiple questions, real-time scoring, and performance feedback system.</div>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-badge">Excel</div>
+      <div class="project-type">Data Analysis</div>
+      <div class="project-name">Fragile States Index Analysis 2023</div>
+      <div class="project-desc">Data analysis and visualization of global fragile states index using advanced Excel functions and charting.</div>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-badge">Python</div>
+      <div class="project-type">Utility Tool</div>
+      <div class="project-name">Simple Calculator App</div>
+      <div class="project-desc">Feature-rich calculator supporting addition, subtraction, multiplication, division, square, and cube with error handling.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-label reveal">Get In Touch</div>
+  <h2 class="section-title reveal">Let's Work<br>Together</h2>
+  <div class="contact-grid">
+    <div class="contact-text reveal">
+      <p>I am actively looking for opportunities in Dubai across administrative, data management, accounting, and HR support roles. Open to full-time, part-time, and remote positions.</p>
+      <br>
+      <p>Feel free to reach out — I respond promptly and am always open to a conversation.</p>
+    </div>
+    <div class="contact-items reveal">
+      <a href="tel:+971505091443" class="contact-item">
+        <span class="contact-item-icon">📞</span>
+        <div class="contact-item-info">
+          <div class="contact-item-label">Phone</div>
+          <div class="contact-item-val">+971 505 091 443</div>
+        </div>
+      </a>
+      <a href="mailto:Seher.n2001@gmail.com" class="contact-item">
+        <span class="contact-item-icon">✉️</span>
+        <div class="contact-item-info">
+          <div class="contact-item-label">Email</div>
+          <div class="contact-item-val">Seher.n2001@gmail.com</div>
+        </div>
+      </a>
+      <a href="https://linkedin.com/in/seher-naeem-022966263" target="_blank" class="contact-item">
+        <span class="contact-item-icon">💼</span>
+        <div class="contact-item-info">
+          <div class="contact-item-label">LinkedIn</div>
+          <div class="contact-item-val">linkedin.com/in/seher-naeem</div>
+        </div>
+      </a>
+      <div class="contact-item">
+        <span class="contact-item-icon">📍</span>
+        <div class="contact-item-info">
+          <div class="contact-item-label">Location</div>
+          <div class="contact-item-val">Dubai, United Arab Emirates</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Seher Naeem. All rights reserved.</p>
+  <p>Built with purpose · Dubai, UAE</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
